@@ -39,12 +39,14 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdhjr"]
-size = Vector2(14, 13)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2vcm"]
+size = Vector2(10, 13)
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 15
+motion_mode = 1
+floor_constant_speed = true
 script = ExtResource("1_lsunl")
 speed = 30.0
 
@@ -57,4 +59,4 @@ frame_progress = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_pdhjr")
+shape = SubResource("RectangleShape2D_q2vcm")

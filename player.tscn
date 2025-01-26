@@ -38,7 +38,8 @@ size = Vector2(10, 13)
 size = Vector2(12, 15)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_mask = 14
+collision_mask = 30
+motion_mode = 1
 script = ExtResource("1_18rgw")
 speed = 70.0
 

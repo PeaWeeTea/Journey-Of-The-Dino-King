@@ -8,40 +8,40 @@ script = ExtResource("1_d2brr")
 [node name="Spawnpoints" type="Node2D" parent="."]
 
 [node name="UpSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(-6, -103)
+position = Vector2(-7, -103)
 
 [node name="UpSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
 position = Vector2(8, -103)
 
 [node name="UpSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(22, -103)
+position = Vector2(23, -103)
 
 [node name="RightSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(120, 10)
+position = Vector2(120, 9)
 
 [node name="RightSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
 position = Vector2(120, 24)
 
 [node name="RightSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(120, 38)
+position = Vector2(120, 39)
 
 [node name="DownSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(-6, 136)
+position = Vector2(-7, 136)
 
 [node name="DownSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
 position = Vector2(8, 136)
 
 [node name="DownSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(22, 136)
+position = Vector2(23, 136)
 
 [node name="LeftSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(-120, 10)
+position = Vector2(-120, 9)
 
 [node name="LeftSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
 position = Vector2(-120, 24)
 
 [node name="LeftSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
-position = Vector2(-120, 38)
+position = Vector2(-120, 39)
 
 [node name="SpawnRate" type="Timer" parent="."]
 wait_time = 10.0

@@ -24,6 +24,10 @@ func _process(_delta):
 		get_tree().quit()
 	elif Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+	# If the level timer is running down update the level timer ber ui
+	if !$LevelTimer.is_stopped():
+		$GUI/LevelTimeBar.value = $LevelTimer.time_left
+	print($LevelTimer.time_left)
 
 
 func _on_life_lost(current_lives):
@@ -45,3 +49,7 @@ func spawn_player(spawn_point):
 	player = PLAYER_SCENE.instantiate()
 	add_child(player)
 	player.global_position = spawn_point
+
+
+func _on_start_delay_timer_timeout():
+	$LevelTimer.start()
