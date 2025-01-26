@@ -2,15 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://d2ch6i0cb7qvv" path="res://player.tscn" id="1_ajobc"]
 [ext_resource type="Script" path="res://world.gd" id="1_i6e4c"]
-[ext_resource type="FontFile" uid="uid://bmtgurjodsixp" path="res://assets/fonts/m5x7.ttf" id="2_28p8c"]
 [ext_resource type="PackedScene" uid="uid://1yqnrdg468fg" path="res://level_tile_map.tscn" id="2_80cxx"]
+[ext_resource type="FontFile" uid="uid://bbx7k7pgqf2cu" path="res://assets/fonts/Poco.ttf" id="2_ypiim"]
 [ext_resource type="PackedScene" uid="uid://g7b2jl8mjtga" path="res://enemy.tscn" id="4_e4750"]
-[ext_resource type="PackedScene" uid="uid://mqbvhvjex0o5" path="res://spawner.tscn" id="6_c8ftd"]
+[ext_resource type="PackedScene" uid="uid://mqbvhvjex0o5" path="res://enemyspawner.tscn" id="6_c8ftd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_un80f"]
-font = ExtResource("2_28p8c")
+font = ExtResource("2_ypiim")
+font_size = 20
 font_color = Color(0.435192, 0.435192, 0.435192, 1)
-outline_size = 1
+shadow_size = 0
 
 [node name="World" type="Node2D"]
 position = Vector2(319, 179)
@@ -29,8 +30,8 @@ unique_name_in_owner = true
 layout_mode = 1
 offset_left = 79.0
 offset_top = 36.0
-offset_right = 98.0
-offset_bottom = 59.0
+offset_right = 104.0
+offset_bottom = 63.0
 text = "x3"
 label_settings = SubResource("LabelSettings_un80f")
 
@@ -79,48 +80,4 @@ position = Vector2(101, 9)
 [node name="Enemy8" parent="EnemyContainer" instance=ExtResource("4_e4750")]
 position = Vector2(102, 117)
 
-[node name="Spawner" parent="." instance=ExtResource("6_c8ftd")]
-
-[node name="SpawnpointUp" type="Node2D" parent="Spawner"]
-position = Vector2(8, -103)
-
-[node name="Spawn1" type="Marker2D" parent="Spawner/SpawnpointUp"]
-position = Vector2(-14, 0)
-
-[node name="Spawn2" type="Marker2D" parent="Spawner/SpawnpointUp"]
-
-[node name="Spawn3" type="Marker2D" parent="Spawner/SpawnpointUp"]
-position = Vector2(14, 0)
-
-[node name="SpawnpointRight" type="Node2D" parent="Spawner"]
-position = Vector2(120, 24)
-
-[node name="Spawn1" type="Marker2D" parent="Spawner/SpawnpointRight"]
-position = Vector2(0, -14)
-
-[node name="Spawn2" type="Marker2D" parent="Spawner/SpawnpointRight"]
-
-[node name="Spawn3" type="Marker2D" parent="Spawner/SpawnpointRight"]
-position = Vector2(0, 14)
-
-[node name="SpawnpointDown" type="Node2D" parent="Spawner"]
-position = Vector2(8, 136)
-
-[node name="Spawn1" type="Marker2D" parent="Spawner/SpawnpointDown"]
-position = Vector2(-14, 0)
-
-[node name="Spawn2" type="Marker2D" parent="Spawner/SpawnpointDown"]
-
-[node name="Spawn3" type="Marker2D" parent="Spawner/SpawnpointDown"]
-position = Vector2(14, 0)
-
-[node name="SpawnpointLeft" type="Node2D" parent="Spawner"]
-position = Vector2(-120, 24)
-
-[node name="Spawn1" type="Marker2D" parent="Spawner/SpawnpointLeft"]
-position = Vector2(0, -14)
-
-[node name="Spawn2" type="Marker2D" parent="Spawner/SpawnpointLeft"]
-
-[node name="Spawn3" type="Marker2D" parent="Spawner/SpawnpointLeft"]
-position = Vector2(0, 14)
+[node name="EnemySpawner" parent="." instance=ExtResource("6_c8ftd")]
