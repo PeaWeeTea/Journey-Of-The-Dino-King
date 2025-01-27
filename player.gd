@@ -23,6 +23,5 @@ func _physics_process(delta):
 		else:
 			Events.player_life_lost.emit(PlayerVariables.lives, respawn_time)
 			queue_free()
-	print("number of lives: ", PlayerVariables.lives)
 
 

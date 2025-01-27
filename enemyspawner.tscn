@@ -1,50 +1,106 @@
-[gd_scene load_steps=2 format=3 uid="uid://mqbvhvjex0o5"]
+[gd_scene load_steps=6 format=3 uid="uid://mqbvhvjex0o5"]
 
 [ext_resource type="Script" path="res://enemyspawner.gd" id="1_d2brr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gpea1"]
+size = Vector2(49, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ys0l"]
+size = Vector2(15, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe44v"]
+size = Vector2(50, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30nww"]
+size = Vector2(16, 50)
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource("1_d2brr")
 
 [node name="Spawnpoints" type="Node2D" parent="."]
 
-[node name="UpSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="UpSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "up_enemy_spawn_points"]]
 position = Vector2(-7, -103)
+scale = Vector2(0.78, 0.78)
 
-[node name="UpSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="UpSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "up_enemy_spawn_points"]]
 position = Vector2(8, -103)
+scale = Vector2(0.78, 0.78)
 
-[node name="UpSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="UpSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "up_enemy_spawn_points"]]
 position = Vector2(23, -103)
+scale = Vector2(0.78, 0.78)
 
-[node name="RightSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="RightSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "right_enemy_spawn_points"]]
 position = Vector2(120, 9)
+scale = Vector2(0.78, 0.78)
 
-[node name="RightSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="RightSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "right_enemy_spawn_points"]]
 position = Vector2(120, 24)
+scale = Vector2(0.78, 0.78)
 
-[node name="RightSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="RightSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "right_enemy_spawn_points"]]
 position = Vector2(120, 39)
+scale = Vector2(0.78, 0.78)
 
-[node name="DownSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="DownSpawn1" type="Marker2D" parent="Spawnpoints" groups=["down_enemy_spawn_points", "enemy_spawn_points"]]
 position = Vector2(-7, 136)
+scale = Vector2(0.78, 0.78)
 
-[node name="DownSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="DownSpawn2" type="Marker2D" parent="Spawnpoints" groups=["down_enemy_spawn_points", "enemy_spawn_points"]]
 position = Vector2(8, 136)
+scale = Vector2(0.78, 0.78)
 
-[node name="DownSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="DownSpawn3" type="Marker2D" parent="Spawnpoints" groups=["down_enemy_spawn_points", "enemy_spawn_points"]]
 position = Vector2(23, 136)
+scale = Vector2(0.78, 0.78)
 
-[node name="LeftSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="LeftSpawn1" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "left_enemy_spawn_points"]]
 position = Vector2(-120, 9)
+scale = Vector2(0.78, 0.78)
 
-[node name="LeftSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="LeftSpawn2" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "left_enemy_spawn_points"]]
 position = Vector2(-120, 24)
+scale = Vector2(0.78, 0.78)
 
-[node name="LeftSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemyspawnpoints"]]
+[node name="LeftSpawn3" type="Marker2D" parent="Spawnpoints" groups=["enemy_spawn_points", "left_enemy_spawn_points"]]
 position = Vector2(-120, 39)
+scale = Vector2(0.78, 0.78)
 
-[node name="SpawnRate" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
 
-[connection signal="timeout" from="SpawnRate" to="." method="_on_spawn_rate_timeout"]
+[node name="UpSpawnDoorDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="UpDoorCollider" type="CollisionShape2D" parent="UpSpawnDoorDetector"]
+position = Vector2(8.5, -103.5)
+shape = SubResource("RectangleShape2D_gpea1")
+
+[node name="RightSpawnDoorDetector2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="RightDoorCollider" type="CollisionShape2D" parent="RightSpawnDoorDetector2"]
+position = Vector2(120.5, 23.5)
+shape = SubResource("RectangleShape2D_4ys0l")
+
+[node name="DownSpawnDoorDetector3" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="DownDoorCollider" type="CollisionShape2D" parent="DownSpawnDoorDetector3"]
+position = Vector2(8, 136)
+shape = SubResource("RectangleShape2D_fe44v")
+
+[node name="LeftSpawnDoorDetector4" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="LeftDoorCollider" type="CollisionShape2D" parent="LeftSpawnDoorDetector4"]
+position = Vector2(-120, 24)
+shape = SubResource("RectangleShape2D_30nww")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_rate_timeout"]

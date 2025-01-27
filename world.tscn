@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2g07x6vffgg8"]
+[gd_scene load_steps=12 format=3 uid="uid://d2g07x6vffgg8"]
 
 [ext_resource type="PackedScene" uid="uid://d2ch6i0cb7qvv" path="res://player.tscn" id="1_ajobc"]
 [ext_resource type="Script" path="res://world.gd" id="1_i6e4c"]
 [ext_resource type="PackedScene" uid="uid://1yqnrdg468fg" path="res://level_tile_map.tscn" id="2_80cxx"]
+[ext_resource type="Texture2D" uid="uid://bxhjub2gosuxm" path="res://assets/art/1coin.png" id="2_bx4xa"]
 [ext_resource type="FontFile" uid="uid://bbx7k7pgqf2cu" path="res://assets/fonts/Poco.ttf" id="2_ypiim"]
 [ext_resource type="Texture2D" uid="uid://ygwqqnwvp81v" path="res://assets/art/level_timer_bar.png" id="3_yadep"]
 [ext_resource type="Texture2D" uid="uid://dh3auanhpmaum" path="res://assets/art/empty_level_timer_bar.png" id="4_platf"]
 [ext_resource type="PackedScene" uid="uid://mqbvhvjex0o5" path="res://enemyspawner.tscn" id="6_c8ftd"]
+[ext_resource type="PackedScene" uid="uid://bp7spmyo0dxlx" path="res://1_coin.tscn" id="8_1eljh"]
+[ext_resource type="PackedScene" uid="uid://b77vde5twfoxy" path="res://5_coin.tscn" id="9_j65un"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_un80f"]
 font = ExtResource("2_ypiim")
@@ -25,6 +28,25 @@ offset_left = -246.0
 offset_top = -124.0
 offset_right = 248.0
 offset_bottom = 149.0
+
+[node name="CoinIcon" type="TextureRect" parent="GUI"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 42.0
+offset_right = 101.0
+offset_bottom = 58.0
+texture = ExtResource("2_bx4xa")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Coins" type="Label" parent="GUI/CoinIcon"]
+unique_name_in_owner = true
+offset_left = 15.0
+offset_top = -1.0
+offset_right = 26.0
+offset_bottom = 13.0
+text = "x0"
+label_settings = SubResource("LabelSettings_un80f")
 
 [node name="Lives" type="Label" parent="GUI"]
 unique_name_in_owner = true
@@ -46,12 +68,6 @@ max_value = 80.0
 value = 80.0
 texture_under = ExtResource("4_platf")
 texture_progress = ExtResource("3_yadep")
-
-[node name="TextureRect" type="TextureRect" parent="GUI"]
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 29.0
-expand_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, 15.815)
@@ -98,5 +114,17 @@ polygon = PackedVector2Array(112, -3, 128, -3, 128, 51, 112, 51)
 
 [node name="DownWall" type="CollisionPolygon2D" parent="InvisibleWalls"]
 polygon = PackedVector2Array(-19, 144, 35, 144, 35, 128, -19, 128)
+
+[node name="1Coin" parent="." instance=ExtResource("8_1eljh")]
+position = Vector2(-20, -20)
+
+[node name="5Coin" parent="." instance=ExtResource("9_j65un")]
+position = Vector2(8, -19)
+
+[node name="1Coin2" parent="." instance=ExtResource("8_1eljh")]
+position = Vector2(-29, 57)
+
+[node name="5Coin2" parent="." instance=ExtResource("9_j65un")]
+position = Vector2(36, 64)
 
 [connection signal="timeout" from="StartDelayTimer" to="." method="_on_start_delay_timer_timeout"]
