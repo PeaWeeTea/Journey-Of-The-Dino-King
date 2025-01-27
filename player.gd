@@ -1,10 +1,7 @@
 extends CharacterBody2D
 
-signal lives_depleted
-signal life_lost(current_lives)
-
 @export var speed = 100.0
-var lives = 3
+@export var respawn_time = 3
 
 func _physics_process(delta):
 	var direction = Vector2(Input.get_axis("move_left", "move_right"),
@@ -19,13 +16,13 @@ func _physics_process(delta):
 	
 	var overlapping_mobs = %HurtBox.get_overlapping_bodies()
 	if overlapping_mobs.size() > 0:
-		lives -= 1
-		if lives <= 0:
-			lives_depleted.emit()
+		PlayerVariables.lives -= 1
+		if PlayerVariables.lives <= 0:
+			Events.player_lives_depleted.emit()
 			queue_free()
 		else:
-			life_lost.emit(lives)
+			Events.player_life_lost.emit(PlayerVariables.lives, respawn_time)
 			queue_free()
-
+	print("number of lives: ", PlayerVariables.lives)
 
 

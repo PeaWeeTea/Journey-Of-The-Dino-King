@@ -15,6 +15,11 @@ run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://assets/art/icon.svg"
 
+[autoload]
+
+PlayerVariables="*res://Player_Variables.gd"
+Events="*res://Events.gd"
+
 [display]
 
 window/size/viewport_width=640
