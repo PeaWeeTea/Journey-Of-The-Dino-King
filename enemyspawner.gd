@@ -26,9 +26,13 @@ func _on_spawn_rate_timeout():
 	var player = get_node("/root/World/Player")
 	for spawn_door in spawn_door_list:
 		for spawn_point in spawn_door:
+			var spawn_position = spawn_point.global_position
+			print("spawn point position: ", spawn_position)
 			if player != null:
 				var enemy = enemy_scene.instantiate()
-				spawn_point.add_child(enemy)
+				enemy.global_position = spawn_position
+				print("enemy spawn position: ", enemy.global_position)
+				get_parent().add_child(enemy)
 
 func increase_difficulty():
 	pass
