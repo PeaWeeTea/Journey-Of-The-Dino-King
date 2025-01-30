@@ -49,6 +49,8 @@ motion_mode = 1
 floor_constant_speed = true
 script = ExtResource("1_lsunl")
 speed = 30.0
+one_coin_drop_rate = 0.05
+five_coin_drop_rate = 0.01
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nv4bi")

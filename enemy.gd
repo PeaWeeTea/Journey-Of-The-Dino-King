@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-var health = 1
+@export var health = 1
 
-var one_coin_instance = preload("res://1_coin.tscn").instantiate()
-var five_coin_instance = preload("res://5_coin.tscn").instantiate()
+@export var one_coin_instance = preload("res://1_coin.tscn").instantiate()
+@export var five_coin_instance = preload("res://5_coin.tscn").instantiate()
 @onready var player = get_node("/root/World/Player")
+@onready var level_node = get_parent()
 
 @export var speed = 40.0
 @export var one_coin_drop_rate = 0.1
@@ -19,17 +20,17 @@ func _physics_process(delta):
 
 func take_damage():
 	health -= 1
-	
 	if health == 0:
 		if try_coin_drop(five_coin_drop_rate) == true:
 			# drop the five coin
 			five_coin_instance.global_position = global_position
-			get_parent().add_child(five_coin_instance)
+			level_node.add_child(five_coin_instance)
 		elif try_coin_drop(one_coin_drop_rate) == true:
 			# drop the one coin
 			one_coin_instance.global_position = global_position
-			get_parent().add_child(one_coin_instance)
-		queue_free()
+			level_node.add_child(one_coin_instance)
+		# defer the queue_free call to after the physics processes
+		call_deferred("queue_free")
 
 # returns true if a coin can drop and false if it cannot
 func try_coin_drop(drop_rate) -> bool:
