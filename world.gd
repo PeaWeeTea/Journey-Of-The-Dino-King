@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var next_level : PackedScene
+
 @onready var PLAYER_SCENE = preload("res://player.tscn")
 var player = null
 
@@ -7,13 +9,18 @@ var player = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	PlayerVariables.lives = 3
-	player = get_tree().get_first_node_in_group("player")
-	assert(player!=null)
-	
+	if not next_level is PackedScene:
+		#level_completed_gui.next_level_button.text = "Victory Screen"
+		next_level = load("res://victory_screen.tscn")
+	Events.level_completed.connect(show_level_completed)
 	Events.player_life_lost.connect(_on_player_life_lost)
 	Events.player_lives_depleted.connect(_on_player_lives_depleted)
 	Events.coin_collected.connect(_on_coin_collected)
+	LevelTransition.fade_from_black()
+	
+	PlayerVariables.lives = 3
+	player = get_tree().get_first_node_in_group("player")
+	assert(player!=null)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +58,13 @@ func spawn_player(spawn_point):
 	add_child(player)
 	player.global_position = spawn_point
 
-
 func _on_start_delay_timer_timeout():
 	$LevelTimer.start()
+	enemy_spawner.difficulty_level = 1
+
+func show_level_completed():
+	pass
+
+
+func _on_level_timer_timeout():
+	$TileMapContainer/LevelFinishedTileMap.visible = true

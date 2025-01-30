@@ -14,17 +14,23 @@ var difficulty_level = 0
 	"left" : get_tree().get_nodes_in_group("left_enemy_spawn_points")}
 # dictionary of spawn doors (key) and number of enemies in the spawn queue (value)
 @onready var spawn_queue_dict = {
-	"up" : 4,
-	"right" : 4,
-	"down" : 4,
-	"left" : 4 }
+	"up" : 0,
+	"right" : 0,
+	"down" : 0,
+	"left" : 0 }
 
 func _ready():
-	# randomize the spawn timer on ready
-	randomize_timer(difficulty_level)
-# Every time the spawnrate timer times out spawn an enemy on a random number of
-# spawnpoints in the enemyspawnpoints group
+	pass
+
 func _physics_process(delta):
+	# if difficulty level is 0 then return over and stop spawn timer
+	if difficulty_level == 0:
+		if not spawn_timer.is_stopped():
+			spawn_timer.stop()
+		return
+	# turn on spawn timer if it is off
+	if spawn_timer.is_stopped():
+		spawn_timer.start()
 	# if there are enemies in the spawn queue they will spawn first
 	spawn_enemies_in_spawn_queue()
 	# Countdown the difficulty timer
@@ -35,7 +41,13 @@ func _physics_process(delta):
 		increase_difficulty()
 		difficulty_timer = 20.0 # Reset the difficulty timer
 
+# Every time the spawnrate timer times out spawn an enemy on a random number of
+# spawnpoints in the enemyspawnpoints group
 func _on_spawn_rate_timeout():
+	# if difficulty level is 0 then skip everything else
+	if difficulty_level == 0:
+		return
+	
 	# Randomly choose which doorways to spawn enemies
 	
 	# Randomly choose how many enemies to spawn
@@ -108,3 +120,7 @@ func get_random_doorways():
 
 func randomize_timer(level_of_difficulty):
 	$SpawnTimer.wait_time = randi_range(4, 8)
+
+
+func _on_level_timer_timeout():
+	difficulty_level = 0

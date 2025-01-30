@@ -68,8 +68,7 @@ position = Vector2(-120, 39)
 scale = Vector2(0.78, 0.78)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
+wait_time = 0.05
 
 [node name="UpSpawnDoorDetector" type="Area2D" parent="."]
 collision_layer = 0

@@ -19,6 +19,8 @@ config/icon="res://assets/art/icon.svg"
 
 PlayerVariables="*res://Player_Variables.gd"
 Events="*res://Events.gd"
+LevelManager="*res://Level_Manager.gd"
+LevelTransition="*res://level_transition.tscn"
 
 [display]
 
