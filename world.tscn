@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bbx7k7pgqf2cu" path="res://assets/fonts/Poco.ttf" id="2_ypiim"]
 [ext_resource type="Texture2D" uid="uid://ygwqqnwvp81v" path="res://assets/art/level_timer_bar.png" id="3_yadep"]
 [ext_resource type="Texture2D" uid="uid://dh3auanhpmaum" path="res://assets/art/empty_level_timer_bar.png" id="4_platf"]
-[ext_resource type="PackedScene" uid="uid://mqbvhvjex0o5" path="res://enemyspawner.tscn" id="6_c8ftd"]
+[ext_resource type="PackedScene" uid="uid://cw77qaydn6tyv" path="res://enemyspawner.tscn" id="6_c8ftd"]
 [ext_resource type="Texture2D" uid="uid://chepdejvjnxmp" path="res://assets/art/tileset.png" id="8_02j2x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_un80f"]
@@ -119,7 +119,7 @@ layer_0/tile_data = PackedInt32Array(983037, 65536, 0, 983036, 65536, 0, 983038,
 [node name="EnemySpawner" parent="." instance=ExtResource("6_c8ftd")]
 
 [node name="LevelTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 80.0
 one_shot = true
 
 [node name="StartDelayTimer" type="Timer" parent="."]
