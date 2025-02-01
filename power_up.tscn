@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf303giq2l41o"]
+
+[ext_resource type="Script" path="res://power_up.gd" id="1_womaa"]
+
+[node name="PowerUp" type="Area2D"]
+script = ExtResource("1_womaa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="ActivatedDurationTimer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="timeout" from="ActivatedDurationTimer" to="." method="_on_activated_duration_timer_timeout"]

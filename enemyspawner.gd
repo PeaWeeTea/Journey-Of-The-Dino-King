@@ -23,7 +23,6 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	print(spawn_timer.time_left)
 	# if difficulty level is 0 then return over and stop spawn timer
 	if difficulty_level == 0:
 		if not spawn_timer.is_stopped():
@@ -156,13 +155,13 @@ func get_enemies_to_spawn(number_of_enemies_to_spawn: int):
 
 
 func get_random_amount_of_enemies(): # return an int
-	return randi_range(6, 18) # temp return rand num between 6 and 18
+	return randi_range(1, 6) # temp return rand num between 6 and 18
 
 func randomize_wait_time(level_of_difficulty):
 	# stop the timer and then set the random time so timer doesn't start
 	# counting down again before setting the new wait time
 	spawn_timer.stop()
-	$SpawnTimer.wait_time = randi_range(4, 8)
+	$SpawnTimer.wait_time = randf_range(1.0, 2.0)
 	spawn_timer.start()
 
 # set the difficulty level to zero when the level ends
