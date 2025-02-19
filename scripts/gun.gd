@@ -24,7 +24,7 @@ func _physics_process(delta):
 
 
 func shoot(bullet_spawn):
-	const BULLET_SCENE = preload("res://bullet.tscn")
+	const BULLET_SCENE = preload("res://scenes/bullet.tscn")
 	var new_bullet = BULLET_SCENE.instantiate()
 	
 	new_bullet.global_position = bullet_spawn.global_position

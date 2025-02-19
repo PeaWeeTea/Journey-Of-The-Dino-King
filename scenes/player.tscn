@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://d2ch6i0cb7qvv"]
 
 [ext_resource type="Texture2D" uid="uid://s3ca411nm7yx" path="res://assets/art/Dino.png" id="1_3lu0f"]
-[ext_resource type="Script" path="res://player.gd" id="1_18rgw"]
-[ext_resource type="PackedScene" uid="uid://4dx8fbvpsacl" path="res://gun.tscn" id="3_8psew"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_18rgw"]
+[ext_resource type="PackedScene" uid="uid://4dx8fbvpsacl" path="res://scenes/gun.tscn" id="3_8psew"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ff2vp"]
 atlas = ExtResource("1_3lu0f")

@@ -1,6 +1,6 @@
 extends Node2D
 
-var enemy_scene = preload("res://enemy.tscn")
+var enemy_scene = preload("res://scenes/enemy.tscn")
 @onready var enemy_spawn_active = false
 @onready var spawn_timer = $SpawnTimer
 var difficulty_timer: float = 20.0 # time between difficulty increases

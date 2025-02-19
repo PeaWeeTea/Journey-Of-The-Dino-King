@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bj21f6r1diknd"]
 
-[ext_resource type="Script" path="res://coin.gd" id="1_yb3rb"]
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_yb3rb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvag8"]
 size = Vector2(9, 9)

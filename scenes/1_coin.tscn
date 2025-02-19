@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bp7spmyo0dxlx"]
 
 [ext_resource type="Texture2D" uid="uid://bxhjub2gosuxm" path="res://assets/art/1coin.png" id="1_m2vtw"]
-[ext_resource type="PackedScene" uid="uid://bj21f6r1diknd" path="res://coin.tscn" id="1_tvr7c"]
+[ext_resource type="PackedScene" uid="uid://bj21f6r1diknd" path="res://scenes/coin.tscn" id="1_tvr7c"]
 
 [node name="1Coin" instance=ExtResource("1_tvr7c")]
 coin_value = 1

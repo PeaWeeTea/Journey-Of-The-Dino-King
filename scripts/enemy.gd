@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @export var health = 1
 
-@export var one_coin_instance = preload("res://1_coin.tscn").instantiate()
-@export var five_coin_instance = preload("res://5_coin.tscn").instantiate()
+@export var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
+@export var five_coin_instance = preload("res://scenes/5_coin.tscn").instantiate()
 @onready var player = get_node("/root/World/Player")
 @onready var level_node = get_parent()
 

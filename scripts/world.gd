@@ -2,7 +2,7 @@ extends Node2D
 
 @export var next_level : PackedScene
 
-@onready var PLAYER_SCENE = preload("res://player.tscn")
+@onready var PLAYER_SCENE = preload("res://scenes/player.tscn")
 var player = null
 
 @onready var enemy_spawner = $EnemySpawner
