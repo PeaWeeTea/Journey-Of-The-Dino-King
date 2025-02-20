@@ -78,7 +78,7 @@ func increase_difficulty():
 # spawns all the enemies in each doorway if there are any in the queue and
 # the doorway is clear of enemies
 func spawn_enemies_in_spawn_queue():
-	var player = get_node("/root/World/Player")
+	var player = get_node("../Player")
 	# iterated through each direction in the spawn_queue_dict
 	for direction in spawn_queue_dict.keys():
 		if spawn_queue_dict[direction] > 0:

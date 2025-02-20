@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2g07x6vffgg8"]
+[gd_scene load_steps=16 format=3 uid="uid://d2g07x6vffgg8"]
 
 [ext_resource type="PackedScene" uid="uid://d2ch6i0cb7qvv" path="res://scenes/player.tscn" id="1_ajobc"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_i6e4c"]
@@ -39,6 +39,15 @@ terrain_set_0/terrain_0/color = Color(0.8575, 0.694807, 0.600362, 1)
 terrain_set_0/terrain_1/name = "Floor"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_uqrc8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0qlo"]
+size = Vector2(256, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fw54"]
+size = Vector2(20, 257)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4new5"]
+size = Vector2(50, 22)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_i6e4c")
@@ -101,7 +110,7 @@ unique_name_in_owner = true
 position = Vector2(0, 13)
 
 [node name="Player" parent="." instance=ExtResource("1_ajobc")]
-position = Vector2(0, 13)
+position = Vector2(6, -88)
 
 [node name="TileMapContainer" type="Node2D" parent="."]
 
@@ -143,6 +152,40 @@ polygon = PackedVector2Array(112, -3, 128, -3, 128, 51, 112, 51)
 [node name="DownWall" type="CollisionPolygon2D" parent="InvisibleWalls"]
 polygon = PackedVector2Array(-19, 144, 35, 144, 35, 128, -19, 128)
 
+[node name="BulletWalls" type="StaticBody2D" parent="InvisibleWalls"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="DownBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
+position = Vector2(-1, 157)
+shape = SubResource("RectangleShape2D_n0qlo")
+disabled = true
+
+[node name="UpBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
+position = Vector2(5, -110)
+shape = SubResource("RectangleShape2D_n0qlo")
+disabled = true
+
+[node name="LeftBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
+position = Vector2(-122, 16)
+shape = SubResource("RectangleShape2D_8fw54")
+disabled = true
+
+[node name="RightBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
+position = Vector2(122, 17)
+shape = SubResource("RectangleShape2D_8fw54")
+
+[node name="LevelCompleteTrigger" type="Area2D" parent="."]
+collision_layer = 0
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelCompleteTrigger"]
+position = Vector2(8, 149)
+shape = SubResource("RectangleShape2D_4new5")
+
 [connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
 [connection signal="timeout" from="LevelTimer" to="EnemySpawner" method="_on_level_timer_timeout"]
 [connection signal="timeout" from="StartDelayTimer" to="." method="_on_start_delay_timer_timeout"]
+[connection signal="area_entered" from="LevelCompleteTrigger" to="." method="_on_level_complete_trigger_area_entered"]
+[connection signal="body_entered" from="LevelCompleteTrigger" to="." method="_on_level_complete_trigger_body_entered"]

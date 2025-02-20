@@ -11,7 +11,7 @@ var player = null
 func _ready():
 	if not next_level is PackedScene:
 		#level_completed_gui.next_level_button.text = "Victory Screen"
-		next_level = load("res://victory_screen.tscn")
+		next_level = load("res://scenes/victory_screen.tscn")
 	Events.level_completed.connect(show_level_completed)
 	Events.player_life_lost.connect(_on_player_life_lost)
 	Events.player_lives_depleted.connect(_on_player_lives_depleted)
@@ -66,5 +66,23 @@ func show_level_completed():
 	pass
 
 
+func go_to_next_level():
+	get_tree().paused = true
+	if not next_level is PackedScene: return
+	await LevelTransition.fade_to_black()
+	get_tree().paused = false
+	get_tree().change_scene_to_packed(next_level)
+
+
 func _on_level_timer_timeout():
 	$TileMapContainer/LevelFinishedTileMap.visible = true
+	$InvisibleWalls/DownWall.disabled = true
+	
+	# enable the bullet barrier around the level
+	$InvisibleWalls/BulletWalls/DownBoundary.disabled = false
+	$InvisibleWalls/BulletWalls/UpBoundary.disabled = false
+	$InvisibleWalls/BulletWalls/LeftBoundary.disabled = false
+
+func _on_level_complete_trigger_body_entered(body):
+	print("Player triggered level complete")
+	go_to_next_level()

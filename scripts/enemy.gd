@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @export var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
 @export var five_coin_instance = preload("res://scenes/5_coin.tscn").instantiate()
-@onready var player = get_node("/root/World/Player")
+@onready var player = get_node("../Player")
 @onready var level_node = get_parent()
 
 @export var speed = 40.0
