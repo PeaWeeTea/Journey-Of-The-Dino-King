@@ -29,6 +29,8 @@ func _process(_delta):
 		get_tree().quit()
 	elif Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+	elif Input.is_action_just_pressed("ui_accept"):
+		go_to_next_level()
 	# If the level timer is running down update the level timer bar ui
 	var level_time_left = $LevelTimer.time_left
 	# Controls the difficulty of the level based on level timer
@@ -79,7 +81,7 @@ func _on_level_timer_timeout():
 	$InvisibleWalls/DownWall.disabled = true
 	
 	# enable the bullet barrier around the level
-	$InvisibleWalls/BulletWalls/DownBoundary.disabled = false
+	$InvisibleWalls/BulletWalls/RightBoundary.disabled = false
 	$InvisibleWalls/BulletWalls/UpBoundary.disabled = false
 	$InvisibleWalls/BulletWalls/LeftBoundary.disabled = false
 

@@ -159,7 +159,6 @@ collision_mask = 0
 [node name="DownBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
 position = Vector2(-1, 157)
 shape = SubResource("RectangleShape2D_n0qlo")
-disabled = true
 
 [node name="UpBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
 position = Vector2(5, -110)
@@ -174,6 +173,7 @@ disabled = true
 [node name="RightBoundary" type="CollisionShape2D" parent="InvisibleWalls/BulletWalls"]
 position = Vector2(122, 17)
 shape = SubResource("RectangleShape2D_8fw54")
+disabled = true
 
 [node name="LevelCompleteTrigger" type="Area2D" parent="."]
 collision_layer = 0

@@ -14,6 +14,19 @@ extends CharacterBody2D
 func _physics_process(delta):
 	if player != null:
 		var direction = global_position.direction_to(player.global_position)
+		#var wall_dir = get_wall_normal()
+		## check if colliding with wall and the angle between the wall and player is less than 45 degrees
+		#if is_on_wall() == true and (abs(wall_dir.angle_to(direction)) >= PI / 4):
+			#print("Enemy angle: ", abs(wall_dir.angle_to(direction)))
+			#var dir_vector = wall_dir
+			#if not dir_vector.x == 0:
+				## randimize 50/50 if y is -1 or 1
+				#dir_vector.y = -1 * (-1 * randi_range(1, 2))
+				#dir_vector.x = 0  # Set x to 0 so no diagonal movement
+			#else:
+				#dir_vector.x = -1 * (-1 * randi_range(1, 2))
+				#dir_vector.y = 0
+			#direction = dir_vector
 		velocity = direction * speed
 	move_and_slide()
 

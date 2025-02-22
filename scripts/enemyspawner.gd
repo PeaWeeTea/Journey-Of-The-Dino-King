@@ -6,6 +6,7 @@ var enemy_scene = preload("res://scenes/enemy.tscn")
 var difficulty_timer: float = 20.0 # time between difficulty increases
 var enemy_spawn_amount_per_door = 3
 var difficulty_level = 0
+
 # dict of arrays of spawn points divided between the 4 doorways: up, right, down, left
 @onready var spawn_door_dict = {
 	"up" : get_tree().get_nodes_in_group("up_enemy_spawn_points"),

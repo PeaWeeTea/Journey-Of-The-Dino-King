@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhswecbdg3qmw"]
+[gd_scene load_steps=3 format=3 uid="uid://bhswecbdg3qmw"]
 
 [ext_resource type="PackedScene" uid="uid://d2g07x6vffgg8" path="res://scenes/world.tscn" id="1_l2i47"]
+[ext_resource type="PackedScene" uid="uid://bxyo24rwk6o3j" path="res://scenes/victory_screen.tscn" id="2_6nwe4"]
 
 [node name="Level_2" instance=ExtResource("1_l2i47")]
+next_level = ExtResource("2_6nwe4")
 
 [node name="Player" parent="." index="3"]
 position = Vector2(8, -88)
