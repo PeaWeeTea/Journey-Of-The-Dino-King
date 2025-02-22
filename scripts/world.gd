@@ -41,9 +41,8 @@ func _on_coin_collected():
 	%Coins.text = "x" + str(PlayerVariables.coins)
 
 func _on_player_life_lost(current_lives, respawn_time):
-	var enemies = get_tree().get_nodes_in_group("enemies")
-	for enemy in enemies:
-		enemy.queue_free()
+	delete_enemies()
+	delete_coins()
 	
 	%Lives.text = "x" + str(current_lives)
 	get_tree().paused = true
@@ -84,7 +83,21 @@ func _on_level_timer_timeout():
 	$InvisibleWalls/BulletWalls/RightBoundary.disabled = false
 	$InvisibleWalls/BulletWalls/UpBoundary.disabled = false
 	$InvisibleWalls/BulletWalls/LeftBoundary.disabled = false
+	
+	delete_enemies()
 
 func _on_level_complete_trigger_body_entered(body):
 	print("Player triggered level complete")
 	go_to_next_level()
+
+
+func delete_enemies():
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		enemy.queue_free()
+
+
+func delete_coins():
+	var coins = get_tree().get_nodes_in_group("coins")
+	for coin in coins:
+		coin.queue_free()
