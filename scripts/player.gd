@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const DEATH_SOUND = preload("res://assets/sfx/playerDeath.wav")
+
 @export var speed = 100.0
 @export var respawn_time = 3
 
@@ -19,9 +21,11 @@ func _physics_process(delta):
 		PlayerVariables.lives -= 1
 		if PlayerVariables.lives <= 0:
 			Events.player_lives_depleted.emit()
+			AudioManager.play_sfx(DEATH_SOUND)
 			queue_free()
 		else:
 			Events.player_life_lost.emit(PlayerVariables.lives, respawn_time)
+			AudioManager.play_sfx(DEATH_SOUND)
 			queue_free()
 
 

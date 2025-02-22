@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var shoot_sound = $ShootSound
+
 var cooldown_ready = true
 const BULLET_SPAWN_DISTANCE = 15
 @export var bullet_coyote_frames = 4
@@ -22,7 +24,6 @@ func _physics_process(delta):
 		shoot(bullet_spawn_point)
 
 
-
 func shoot(bullet_spawn):
 	const BULLET_SCENE = preload("res://scenes/bullet.tscn")
 	var new_bullet = BULLET_SCENE.instantiate()
@@ -32,6 +33,7 @@ func shoot(bullet_spawn):
 	bullet_spawn.add_child(new_bullet)
 	$ShotCooldown.start()
 	cooldown_ready = false
+	shoot_sound.play()
 
 func _on_shot_cooldown_timeout():
 	cooldown_ready = true

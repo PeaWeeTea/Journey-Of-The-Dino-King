@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bxyo24rwk6o3j"]
 
-[ext_resource type="Script" path="res://scenes/victory_screen.gd" id="1_bgshd"]
+[ext_resource type="Script" path="res://scripts/victory_screen.gd" id="1_grr86"]
 
 [node name="VictoryScreen" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ offset_right = -0.280029
 offset_bottom = -0.0800171
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bgshd")
+script = ExtResource("1_grr86")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -48,4 +48,7 @@ offset_right = 53.5
 offset_bottom = -16.912
 grow_horizontal = 2
 grow_vertical = 0
+action_mode = 0
 text = "Main Menu"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

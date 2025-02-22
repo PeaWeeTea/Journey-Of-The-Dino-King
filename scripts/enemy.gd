@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const DEATH_SOUND = preload("res://assets/sfx/enemyDeath.wav")
+
 @export var health = 1
 
 @export var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
@@ -42,6 +44,8 @@ func take_damage():
 			# drop the one coin
 			one_coin_instance.global_position = global_position
 			level_node.add_child(one_coin_instance)
+		
+		AudioManager.play_sfx(DEATH_SOUND)
 		# defer the queue_free call to after the physics processes
 		call_deferred("queue_free")
 

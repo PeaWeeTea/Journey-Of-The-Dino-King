@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dino Shooter"
-run/main_scene="res://scenes/level_1.tscn"
+run/main_scene="res://scenes/menu_screen.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://assets/art/icon.svg"
 
@@ -21,6 +21,7 @@ PlayerVariables="*res://scripts/Player_Variables.gd"
 Events="*res://scripts/Events.gd"
 LevelManager="*res://scripts/Level_Manager.gd"
 LevelTransition="*res://scenes/level_transition.tscn"
+AudioManager="*res://scripts/AudioManager.gd"
 
 [display]
 

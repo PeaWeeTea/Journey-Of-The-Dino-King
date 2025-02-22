@@ -1,5 +1,7 @@
 extends Area2D
 
+const PICKUP_SOUND = preload("res://assets/sfx/pickupCoin.wav")
+
 @export var coin_value: int
 @export var first_despawn_blink_time = 10.0
 @export var last_despawn_blink_time = 4.0
@@ -14,6 +16,7 @@ func _on_body_entered(body):
 	if "player" in body.get_groups():
 		PlayerVariables.coins += coin_value
 		Events.coin_collected.emit()
+		AudioManager.play_sfx(PICKUP_SOUND)
 		queue_free()
 
 func _on_despawn_timer_timeout():

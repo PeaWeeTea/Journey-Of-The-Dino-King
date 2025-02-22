@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://4dx8fbvpsacl"]
+[gd_scene load_steps=4 format=3 uid="uid://4dx8fbvpsacl"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_2whdu"]
+[ext_resource type="AudioStream" uid="uid://bfknw38fbq62m" path="res://assets/sfx/shoot.wav" id="2_u77lf"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_amnrf"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("2_u77lf")
+stream_0/weight = 1.0
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_2whdu")
@@ -9,7 +16,6 @@ script = ExtResource("1_2whdu")
 unique_name_in_owner = true
 position = Vector2(15, 15)
 rotation = 0.785398
-scale = Vector2(1, 1)
 
 [node name="DownRightBulletSpawn" type="Marker2D" parent="." groups=["down_spawn", "right_spawn", "spawn_points"]]
 unique_name_in_owner = true
@@ -53,5 +59,8 @@ position = Vector2(15, 0)
 [node name="ShotCooldown" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_amnrf")
 
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_shot_cooldown_timeout"]
