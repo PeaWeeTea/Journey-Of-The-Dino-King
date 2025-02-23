@@ -2,8 +2,8 @@ extends Node2D
 
 @export var next_level : PackedScene
 
-@onready var PLAYER_SCENE = preload("res://scenes/player.tscn")
-var player = null
+var PLAYER_SCENE = preload("res://scenes/player.tscn")
+@onready var player = $Player
 
 @onready var enemy_spawner = $EnemySpawner
 
@@ -16,9 +16,11 @@ func _ready():
 	Events.player_life_lost.connect(_on_player_life_lost)
 	Events.player_lives_depleted.connect(_on_player_lives_depleted)
 	Events.coin_collected.connect(_on_coin_collected)
+	Events.heart_collected.connect(_on_heart_collected)
 	LevelTransition.fade_from_black()
 	
-	PlayerVariables.lives = 3
+	%Coins.text = "x" + str(PlayerVariables.coins)
+	%Lives.text = "x" + str(PlayerVariables.lives)
 	player = get_tree().get_first_node_in_group("player")
 	assert(player!=null)
 
@@ -29,8 +31,6 @@ func _process(_delta):
 		get_tree().quit()
 	elif Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
-	elif Input.is_action_just_pressed("ui_accept"):
-		go_to_next_level()
 	# If the level timer is running down update the level timer bar ui
 	var level_time_left = $LevelTimer.time_left
 	# Controls the difficulty of the level based on level timer
@@ -40,9 +40,14 @@ func _process(_delta):
 func _on_coin_collected():
 	%Coins.text = "x" + str(PlayerVariables.coins)
 
+
+func _on_heart_collected():
+	%Lives.text = "x" + str(PlayerVariables.lives)
+
+
 func _on_player_life_lost(current_lives, respawn_time):
 	delete_enemies()
-	delete_coins()
+	delete_pickupable_objects()
 	
 	%Lives.text = "x" + str(current_lives)
 	get_tree().paused = true
@@ -52,12 +57,14 @@ func _on_player_life_lost(current_lives, respawn_time):
 
 
 func _on_player_lives_depleted():
-	get_tree().reload_current_scene()
+	PlayerVariables.lives = 3
+	PlayerVariables.coins = 0
+	player.queue_free()
+	get_tree().change_scene_to_file("res://scenes/level_1.tscn")
 
 func spawn_player(spawn_point):
-	player = PLAYER_SCENE.instantiate()
-	add_child(player)
 	player.global_position = spawn_point
+	player.visible = true
 
 func _on_start_delay_timer_timeout():
 	$LevelTimer.start()
@@ -67,12 +74,12 @@ func show_level_completed():
 	pass
 
 
-func go_to_next_level():
+func go_to_level(level: PackedScene):
 	get_tree().paused = true
-	if not next_level is PackedScene: return
+	if not level is PackedScene: return
 	await LevelTransition.fade_to_black()
 	get_tree().paused = false
-	get_tree().change_scene_to_packed(next_level)
+	get_tree().change_scene_to_packed(level)
 
 
 func _on_level_timer_timeout():
@@ -85,10 +92,12 @@ func _on_level_timer_timeout():
 	$InvisibleWalls/BulletWalls/LeftBoundary.disabled = false
 	
 	delete_enemies()
+	$GUI/ArrowIcon/BlinkTimer.start()
+	$GUI/ArrowIcon.visible = true
 
 func _on_level_complete_trigger_body_entered(body):
 	print("Player triggered level complete")
-	go_to_next_level()
+	go_to_level(next_level)
 
 
 func delete_enemies():
@@ -97,7 +106,7 @@ func delete_enemies():
 		enemy.queue_free()
 
 
-func delete_coins():
-	var coins = get_tree().get_nodes_in_group("coins")
-	for coin in coins:
-		coin.queue_free()
+func delete_pickupable_objects():
+	var pickupable_objects = get_tree().get_nodes_in_group("pickupable_objects")
+	for object in pickupable_objects:
+		object.queue_free()

@@ -1,6 +1,7 @@
 extends Area2D
 
-const PICKUP_SOUND = preload("res://assets/sfx/pickupCoin.wav")
+const COIN_PICKUP_SOUND = preload("res://assets/sfx/pickupCoin.wav")
+const HEART_PICKUP_SOUND = preload("res://assets/sfx/pickupHealth.wav")
 
 @export var coin_value: int
 @export var first_despawn_blink_time = 10.0
@@ -13,10 +14,15 @@ func _process(delta):
 	try_despawn_blink(delta)
 
 func _on_body_entered(body):
-	if "player" in body.get_groups():
+	if "player" in body.get_groups() && "coins" in self.get_groups():
 		PlayerVariables.coins += coin_value
 		Events.coin_collected.emit()
-		AudioManager.play_sfx(PICKUP_SOUND)
+		AudioManager.play_sfx(COIN_PICKUP_SOUND)
+		queue_free()
+	elif "player" in body.get_groups() && "hearts" in self.get_groups():
+		PlayerVariables.lives += 1
+		Events.heart_collected.emit()
+		AudioManager.play_sfx(HEART_PICKUP_SOUND)
 		queue_free()
 
 func _on_despawn_timer_timeout():

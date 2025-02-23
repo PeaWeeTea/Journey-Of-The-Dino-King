@@ -38,10 +38,12 @@ size = Vector2(10, 13)
 size = Vector2(12, 15)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+process_mode = 1
 collision_mask = 30
 motion_mode = 1
 script = ExtResource("1_18rgw")
 speed = 70.0
+respawn_time = 2
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

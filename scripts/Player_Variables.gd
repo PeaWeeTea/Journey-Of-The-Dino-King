@@ -1,4 +1,4 @@
 extends Node
 
-var lives
-@onready var coins = 0
+var lives: int = 3
+var coins: int = 0

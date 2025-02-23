@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bj21f6r1diknd"]
 
-[ext_resource type="Script" path="res://scripts/coin.gd" id="1_yb3rb"]
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_gc52o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvag8"]
-size = Vector2(9, 9)
+size = Vector2(11, 9)
 
-[node name="Coin" type="Area2D" groups=["coins"]]
-script = ExtResource("1_yb3rb")
+[node name="PickupableObject" type="Area2D" groups=["pickupable_objects"]]
+script = ExtResource("1_gc52o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

@@ -7,6 +7,8 @@ var difficulty_timer: float = 20.0 # time between difficulty increases
 var enemy_spawn_amount_per_door = 3
 var difficulty_level = 0
 
+@onready var player = get_node("../Player")
+
 # dict of arrays of spawn points divided between the 4 doorways: up, right, down, left
 @onready var spawn_door_dict = {
 	"up" : get_tree().get_nodes_in_group("up_enemy_spawn_points"),
@@ -20,8 +22,6 @@ var difficulty_level = 0
 	"down" : 0,
 	"left" : 0 }
 
-func _ready():
-	pass
 
 func _physics_process(delta):
 	# if difficulty level is 0 then return over and stop spawn timer
@@ -79,7 +79,6 @@ func increase_difficulty():
 # spawns all the enemies in each doorway if there are any in the queue and
 # the doorway is clear of enemies
 func spawn_enemies_in_spawn_queue():
-	var player = get_node("../Player")
 	# iterated through each direction in the spawn_queue_dict
 	for direction in spawn_queue_dict.keys():
 		if spawn_queue_dict[direction] > 0:

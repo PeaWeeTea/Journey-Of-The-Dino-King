@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://b77vde5twfoxy"]
 
-[ext_resource type="PackedScene" uid="uid://bj21f6r1diknd" path="res://scenes/coin.tscn" id="1_obshr"]
+[ext_resource type="PackedScene" uid="uid://bj21f6r1diknd" path="res://scenes/pickupable_object.tscn" id="1_3nxe1"]
 [ext_resource type="Texture2D" uid="uid://dfobyjj3tfy6h" path="res://assets/art/5coin.png" id="2_qnjvk"]
 
-[node name="5Coin" instance=ExtResource("1_obshr")]
+[node name="5Coin" groups=["coins"] instance=ExtResource("1_3nxe1")]
 coin_value = 5
 
 [node name="Sprite2D" parent="." index="0"]

@@ -4,14 +4,16 @@ const DEATH_SOUND = preload("res://assets/sfx/enemyDeath.wav")
 
 @export var health = 1
 
-@export var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
-@export var five_coin_instance = preload("res://scenes/5_coin.tscn").instantiate()
+var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
+var five_coin_instance = preload("res://scenes/5_coin.tscn").instantiate()
+var heart_instance = preload("res://scenes/heart.tscn").instantiate()
 @onready var player = get_node("../Player")
 @onready var level_node = get_parent()
 
 @export var speed = 40.0
 @export var one_coin_drop_rate = 0.1
 @export var five_coin_drop_rate = 0.05
+@export var heart_drop_rate = 0.009
 
 func _physics_process(delta):
 	if player != null:
@@ -36,11 +38,15 @@ func _physics_process(delta):
 func take_damage():
 	health -= 1
 	if health == 0:
-		if try_coin_drop(five_coin_drop_rate) == true:
+		if try_rand_drop(heart_drop_rate) == true:
+			# drop the heart
+			heart_instance.global_position = global_position
+			level_node.add_child(heart_instance)
+		elif try_rand_drop(five_coin_drop_rate) == true:
 			# drop the five coin
 			five_coin_instance.global_position = global_position
 			level_node.add_child(five_coin_instance)
-		elif try_coin_drop(one_coin_drop_rate) == true:
+		elif try_rand_drop(one_coin_drop_rate) == true:
 			# drop the one coin
 			one_coin_instance.global_position = global_position
 			level_node.add_child(one_coin_instance)
@@ -50,7 +56,7 @@ func take_damage():
 		call_deferred("queue_free")
 
 # returns true if a coin can drop and false if it cannot
-func try_coin_drop(drop_rate) -> bool:
+func try_rand_drop(drop_rate) -> bool:
 	# Generate a random float between 0 and 1
 	var drop_chance = randf()
 	
