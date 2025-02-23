@@ -39,8 +39,9 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2vcm"]
-size = Vector2(10, 13)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h63h7"]
+radius = 5.0
+height = 13.0
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
@@ -61,4 +62,4 @@ frame_progress = 1.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_q2vcm")
+shape = SubResource("CapsuleShape2D_h63h7")
