@@ -2,7 +2,7 @@ extends Control
 
 const CLICK_SOUND = preload("res://assets/sfx/click.wav")
 
-@onready var menu_button = $MainMenuButton
+@onready var menu_button = $QuitButton
 
 func _ready():
 	get_tree().paused = false
@@ -11,5 +11,6 @@ func _ready():
 	menu_button.grab_focus()
 
 
-func _on_main_menu_button_pressed():
-	AudioManager.play_sfx(CLICK_SOUND)
+func _on_quit_button_pressed():
+	await AudioManager.play_sfx(CLICK_SOUND)
+	get_tree().quit()
