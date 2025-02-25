@@ -3,17 +3,21 @@ extends CharacterBody2D
 const DEATH_SOUND = preload("res://assets/sfx/enemyDeath.wav")
 
 @export var health = 1
+@export var speed = 27
 
-var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
-var five_coin_instance = preload("res://scenes/5_coin.tscn").instantiate()
-var heart_instance = preload("res://scenes/heart.tscn").instantiate()
+# reference nodes
 @onready var player = get_node("../Player")
 @onready var level_node = get_parent()
 
-@export var speed = 40.0
+# drop variables
 @export var one_coin_drop_rate = 0.1
 @export var five_coin_drop_rate = 0.05
 @export var heart_drop_rate = 0.009
+var one_coin_instance = preload("res://scenes/1_coin.tscn").instantiate()
+var five_coin_instance = preload("res://scenes/5_coin.tscn").instantiate()
+var heart_instance = preload("res://scenes/heart.tscn").instantiate()
+
+
 
 func _physics_process(delta):
 	if player != null:

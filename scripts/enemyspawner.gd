@@ -22,6 +22,11 @@ var difficulty_level = 0
 	"down" : 0,
 	"left" : 0 }
 
+# difficulty variables
+@export var enemy_wave_spawn_time_range = [1.0, 2.0]
+@export var MAX_NUM_SPAWN_PER_DOOR = 4
+@export var num_enemy_spawn_per_wave_range = [1, 6]
+
 
 func _physics_process(delta):
 	# if difficulty level is 0 then return over and stop spawn timer
@@ -81,19 +86,21 @@ func increase_difficulty():
 func spawn_enemies_in_spawn_queue():
 	# iterated through each direction in the spawn_queue_dict
 	for direction in spawn_queue_dict.keys():
-		if spawn_queue_dict[direction] > 0:
-			# if the spawn detector on the [direction] doorway has any bodies on the
-			# enemy layer that does not overlap then spawn upwards of three enemies
-			if not has_blocked_spawn_door(direction):
-				for i in range(spawn_queue_dict[direction]):
-					# if it spawned 3 enemies or the spawn queue emptied, stop
-					if i >= 3 or spawn_queue_dict[direction] <= 0:
-						break
-					# get the ith spawn point position in the array in the dictionary
-					var spawn_point = spawn_door_dict[direction][i].global_position
-					if player != null:
-						spawn_enemy(enemy_scene, spawn_point)
-						spawn_queue_dict[direction] -= 1
+		if spawn_queue_dict[direction] <= 0:
+			continue
+		# if the spawn detector on the [direction] doorway has any bodies on the
+		# enemy layer that does not overlap then spawn upwards of three enemies
+		if has_blocked_spawn_door(direction):
+			continue
+		for i in range(spawn_queue_dict[direction]):
+			# if it spawned 3 enemies or the spawn queue emptied, stop
+			if i >= 3 or spawn_queue_dict[direction] <= 0:
+				break
+			# get the ith spawn point position in the array in the dictionary
+			var spawn_point = spawn_door_dict[direction][i].global_position
+			if player != null:
+				spawn_enemy(enemy_scene, spawn_point)
+				spawn_queue_dict[direction] -= 1
 
 func spawn_enemy(enemy_scene, spawn_position):
 	var enemy = enemy_scene.instantiate()
@@ -126,7 +133,7 @@ func has_blocked_spawn_door(spawn_door_direction) -> bool:
 # then just add these values to the spawn_queue dict
 func get_enemies_to_spawn(number_of_enemies_to_spawn: int):
 	var selected_enemies_to_spawn_dict = {}
-	var num_doorways = randi_range(4, 4)
+	var num_doorways = 4
 	var chosen_indices = []
 	var doorways = spawn_door_dict.keys()
 
@@ -137,16 +144,15 @@ func get_enemies_to_spawn(number_of_enemies_to_spawn: int):
 			chosen_indices.append(index)
 			selected_enemies_to_spawn_dict[doorways[index]] = 0
 	
-	# add a random number between 0 and 7 for each doorway until
+	# add a random number of enemies to spawn for each doorway until
 	# the num of enemies to spawn is 0
-	var MAX_NUM_SPAWN = 4
 	var i = 0
 	var selected_doorways = selected_enemies_to_spawn_dict.keys()
 	while number_of_enemies_to_spawn > 0:
-		if number_of_enemies_to_spawn < MAX_NUM_SPAWN:
-			MAX_NUM_SPAWN = number_of_enemies_to_spawn
+		if number_of_enemies_to_spawn < MAX_NUM_SPAWN_PER_DOOR:
+			MAX_NUM_SPAWN_PER_DOOR = number_of_enemies_to_spawn
 		var iterated_doorway = selected_doorways[i % selected_doorways.size()]
-		var rand_num = randi_range(0, MAX_NUM_SPAWN)
+		var rand_num = randi_range(0, MAX_NUM_SPAWN_PER_DOOR)
 		selected_enemies_to_spawn_dict[iterated_doorway] += rand_num
 		number_of_enemies_to_spawn -= rand_num
 		i += 1
@@ -154,14 +160,14 @@ func get_enemies_to_spawn(number_of_enemies_to_spawn: int):
 	return selected_enemies_to_spawn_dict
 
 
-func get_random_amount_of_enemies(): # return an int
-	return randi_range(1, 6) # temp return rand num between 6 and 18
+func get_random_amount_of_enemies(): # return a random int
+	return randi_range(num_enemy_spawn_per_wave_range[0], num_enemy_spawn_per_wave_range[1]) # temp return rand num between 6 and 18
 
 func randomize_wait_time(level_of_difficulty):
 	# stop the timer and then set the random time so timer doesn't start
 	# counting down again before setting the new wait time
 	spawn_timer.stop()
-	$SpawnTimer.wait_time = randf_range(1.0, 2.0)
+	$SpawnTimer.wait_time = randf_range(enemy_wave_spawn_time_range[0], enemy_wave_spawn_time_range[1])
 	spawn_timer.start()
 
 # set the difficulty level to zero when the level ends

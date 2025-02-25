@@ -13,7 +13,7 @@ config_version=5
 config/name="Dino Shooter"
 run/main_scene="res://scenes/menu_screen.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://assets/art/icon.svg"
+config/icon="res://assets/art/1coin.png"
 
 [autoload]
 
@@ -103,4 +103,5 @@ reset={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
