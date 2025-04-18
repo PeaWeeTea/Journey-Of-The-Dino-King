@@ -1,32 +1,49 @@
-# Journey of The Dino King
-### Video Demo:  https://www.youtube.com/watch?v=_pOJ4kot4FE
-### Play the game: https://peatea16.itch.io/journey-of-the-dino-king
-# Game Engine: Godot 4.2.2
-# Language: GDScript
-### Description:
-Journey of The Dino King is a 2D top-down wave based shooter video game. The game was made in the game engine Godot version 4.2.2. The player uses WASD to move and the ARROW KEYS to shoot hordes of enemies in each level. Survive each level to win the game.
-### Files and Folders
-Let's explore the files and folders.
-#### - Notes
-The Notes folder holds some notes that I had taken about how to implement code for things. Mainly something that isn't really needed for the game to function but for my, the developer's, benefit.
-#### - Assets
-The assets folder stores all the assets for the game. Including the art for each sprite, the app icon that shows up for the app on windows, the fonts used, and the sound effects. This folder is a hub for all the media resources used for the game.
-#### - Scenes
-The scenes folder holds every .tcsn scene file. This is the skeleton of the game and is the bread and butter of Godot. Art, sound, scripts, and many more can be attached to these scenes to create each entity of the game.
-#### - Scripts
-The scripts folder contains the GDscript files that connect to each respective scene. This can modify and change the state of the game depending on various conditions and is what gives the game its logic and functionality.
-### Review
-Looking back it is clear that my expectations of how fast and easy this project was going to be was not correct. If I thought one thing would take 30 minutes, it would take 2 hours. If I thought another thing would take 2 hours, it would take 2 days and add another 3 bugs. Programming and game development is extremely difficult to estimate how much time something would take to develop and usaully you underestamate.
+# 🦖 Journey of The Dino King
 
-Though there is one script that took a while for me to iron out and fix but I am really proud of. And that is the enemy_spawner script. Its logic is great!
+### 🎥 Video Demo: [Watch on YouTube](https://www.youtube.com/watch?v=_pOJ4kot4FE)  
+### 🕹️ Play the Game: [Play on Itch.io](https://peatea16.itch.io/journey-of-the-dino-king)
 
-# Enemy Spawn System (GDScript Overview)
+---
+
+## 📜 Description
+
+**Journey of The Dino King** is a 2D top-down wave-based shooter built in **Godot 4.2.2** using **GDScript**. Players control a dinosaur warrior using `WASD` to move and the `Arrow Keys` to fire in different directions. Each level presents increasingly intense enemy waves. Survive them all and become the true Dino King.
+
+---
+
+## 🏗 Project Structure
+
+### `Notes/`
+Developer-only notes and reference files. Not required for gameplay, but useful during development for idea planning and implementation strategies.
+
+### `assets/`
+Contains all visual and audio resources:
+- Sprites and animations
+- Fonts
+- Sound effects
+- App icon for Windows builds
+
+### `scenes/`
+Houses all `.tscn` scene files used in the game. These are the structural blueprints of the game, combining art, sound, and logic.
+
+### `scripts/`
+Includes all GDScript files connected to their respective scenes. These are responsible for gameplay logic, input handling, enemy behavior, spawning, and UI updates.
+
+---
+
+## 💡 Developer Reflection
+
+This project taught me a lot about scope and debugging. I learned firsthand how programming tasks can take **much longer than expected**—what I thought would take 30 minutes could easily take 2 hours… and introduce 3 new bugs along the way. Still, I’m proud of how it turned out, especially one script I spent a lot of time on:
+
+---
+
+# ⚔ Enemy Spawn System (GDScript Overview)
 
 This script, attached to a `Node2D`, handles **enemy spawning** in a Godot game. It manages enemy waves, spawn timing, and difficulty scaling based on game progression.
 
 ---
 
-## Preloaded Scenes & Node References
+## ⏮ Preloaded Scenes & Node References
 
 ```gdscript
 var enemy_scene = preload("res://scenes/enemy.tscn")
@@ -40,7 +57,7 @@ var enemy_scene = preload("res://scenes/enemy.tscn")
 
 ---
 
-## Spawn Point Management
+## ✨ Spawn Point Management
 
 ```gdscript
 @onready var spawn_door_dict = {
@@ -63,7 +80,7 @@ var enemy_scene = preload("res://scenes/enemy.tscn")
 
 ---
 
-## Difficulty and Spawning Configuration
+## 😖 Difficulty and Spawning Configuration
 
 ```gdscript
 var difficulty_timer: float = 20.0
@@ -81,7 +98,7 @@ var difficulty_level = 0
 
 ---
 
-## Main Game Loop: `_physics_process(delta)`
+## 🔄 Main Game Loop: `_physics_process(delta)`
 
 ```gdscript
 func _physics_process(delta):
@@ -110,7 +127,7 @@ Handles the core runtime behavior:
 
 ---
 
-## Spawn Timer Callback: `_on_spawn_rate_timeout()`
+## ⏲ Spawn Timer Callback: `_on_spawn_rate_timeout()`
 
 ```gdscript
 func _on_spawn_rate_timeout():
@@ -135,7 +152,7 @@ Executed every time the spawn timer runs out:
 
 ---
 
-## Enemy Spawning Logic: `spawn_enemies_in_spawn_queue()`
+## 👿 Enemy Spawning Logic: `spawn_enemies_in_spawn_queue()`
 
 ```gdscript
 func spawn_enemies_in_spawn_queue():
@@ -161,7 +178,7 @@ func spawn_enemies_in_spawn_queue():
 
 ---
 
-## Spawn Blocking Check: `has_blocked_spawn_door(direction)`
+## ❌ Spawn Blocking Check: `has_blocked_spawn_door(direction)`
 
 ```gdscript
 func has_blocked_spawn_door(spawn_door_direction) -> bool:
@@ -181,7 +198,7 @@ Checks whether a given door's detector overlaps with other bodies (e.g. player o
 
 ---
 
-## Random Utility Functions
+## 🎲 Random Utility Functions
 
 ### `get_enemies_to_spawn(number_of_enemies_to_spawn)`
 
@@ -244,7 +261,7 @@ Randomizes the spawn interval within the configured range and restarts the timer
 
 ---
 
-## Difficulty Scaling Stub
+## 📈 Difficulty Scaling Stub
 
 ```gdscript
 func increase_difficulty():
@@ -255,7 +272,7 @@ Placeholder for increasing difficulty over time.
 
 ---
 
-## Ending the Level
+## 🔚 Ending the Level
 
 ```gdscript
 func _on_level_timer_timeout():
@@ -263,5 +280,18 @@ func _on_level_timer_timeout():
 ```
 
 Disables all spawning by resetting the difficulty level when the level ends.
+
+---
+
+## 🚀 Technologies Used
+
+- **Game Engine**: Godot 4.2.2  
+- **Language**: GDScript  
+
+---
+
+## 👾 Contact & Feedback
+
+I've slowed down on updating this project but would  love hearing feedback. Feel free to [open an issue](https://github.com/PeaWeeTea/Journey-Of-The-Dino-King/issues) or drop a comment on the YouTube video.
 
 ---
