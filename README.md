@@ -15,3 +15,5 @@ The assets folder stores all the assets for the game. Including the art for each
 The scenes folder holds every .tcsn scene file. This is the skeleton of the game and is the bread and butter of Godot. Art, sound, scripts, and many more can be attached to these scenes to create each entity of the game.
 #### - Scripts
 The scripts folder contains the GDscript files that connect to each respective scene. This can modify and change the state of the game depending on various conditions and is what gives the game its logic and functionality.
+### Review
+Looking back it is clear that my expectations were
